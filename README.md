@@ -1,1 +1,1 @@
-# DigitalSinageWeather
+# DigitalSignageWeather
