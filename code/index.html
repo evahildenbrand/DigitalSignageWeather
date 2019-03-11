@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Test</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.3/papaparse.min.js"></script>
+        <style>
+/*             table {
+                text-align: center;
+                border-collapse: collapse;
+                border: 1px solid #000000;
+            }
+            
+            th, td {
+                padding: 10px 30px;
+                border: 1px solid #000000;
+            }
+            
+            th {
+                border: 1px solid #000000;
+            }    */  
+
+            #output{
+                border: 1px solid black;
+                margin: 0 auto;
+                height: 300px;
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <script>
+            $.ajax({
+                url: 'http://www.zamg.ac.at/ogd/',
+                dataType: 'text',
+            }).done(done);
+
+            function done(data) {
+                let allRows = data.split(/\r?\n|\r/);
+                
+                let table = '<table>';
+
+                for (let row = 0; row < allRows.length; row++) {
+                    table += '<tr>';
+
+                    let cells = allRows[row].split(/\r?\n|\r/);
+                   // let needed = [0,1,5,6,7,10,14,16,19,21];
+
+                    for (let rowCell = 0; rowCell < cells.length; rowCell++) {
+                        if (row == 0) {
+                            table += '<th>' + cells[rowCell] + '</th>';
+                        } else {
+                            table += '<td>' + cells[rowCell] + '</td>';
+                        }
+                        if(rowCell == 1){
+                            table = jQuery.grep(cells, function(n, i){
+                                console.log(n == "Linz/Hörsching");
+                            });
+                        }
+                    }
+
+                    table += '</tr>';      
+                } 
+
+                table += '</table>';
+                
+                $('body').append(table);
+            }
+        </script> -->
+        <script>
+            //"http://www.zamg.ac.at/ogd/"
+            let data;
+            let temp;
+            let stationName;
+            let windSpeed;
+            let rainFall;
+            Papa.parse("http://www.zamg.ac.at/ogd/", {
+	                    download: true,
+                        delimiter: ";",
+	                    complete: function(results) {
+                            console.log(results);
+                            temp = results.data[1][5];
+                            windSpeed = results.data[1][11];
+                            rainFall = results.data[1][12];
+                            document.getElementById("outputTemp").innerHTML = temp + " °C";
+                            document.getElementById("outputWindSpeed").innerHTML = windSpeed + " km/h";
+                            document.getElementById("outputRainFall").innerHTML = rainFall + " m²";
+
+                            /* call function to check which weather icon to select by checking the temp and rainFall (simple) */
+                        }
+                    }); 
+                    
+        </script>
+
+        <div id="output">
+            <p id="outputWeatherIcon"></p>
+            <p id="outputTemp"></p>
+            <p id="outputWindSpeed"></p>
+            <p id="outputRainFall"></p>
+        </div>
+        
+    </body>
+</html>
