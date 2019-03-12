@@ -2,7 +2,7 @@
 <p>
     Zuerst muss man in das Projekt gehen, zu welchem man ein Github-Repo einbinden möchte. Anschließend muss man rechts unter Administration auf VCS gehen.
 </p>
-<img src="./images/vcs.png" height="400px">
+<img src="./images/vcs.png" width="30%">
 <p>
     Danach klickt man auf "New VCS Integration" und es öffnet sich ein Fenster. In diesem Fenster wählt man als Server Type: GitHub aus, als Repository URL fügt man den Link seines GitHub-Repos ein und als Personal access token den Token des GitHub-Repos. Falls man noch keinen Token hat, kann man darunter auf Generate token klicken, um direkt einen Token zu erstellen.
 </p>
