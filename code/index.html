@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Test</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.3/papaparse.min.js"></script>
-        <style>
-/*             table {
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.3/papaparse.min.js"></script> -->
+    <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+    <style>
+      /*             table {
                 text-align: center;
                 border-collapse: collapse;
                 border: 1px solid #000000;
@@ -19,18 +20,18 @@
             
             th {
                 border: 1px solid #000000;
-            }    */  
+            }    */
 
-            #output{
-                border: 1px solid black;
-                margin: 0 auto;
-                height: 300px;
-                width: 200px;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- <script>
+      #output {
+        border: 1px solid black;
+        margin: 0 auto;
+        height: 300px;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <script>
             $.ajax({
                 url: 'http://www.zamg.ac.at/ogd/',
                 dataType: 'text',
@@ -68,14 +69,14 @@
                 $('body').append(table);
             }
         </script> -->
-        <script>
-            //"http://www.zamg.ac.at/ogd/"
-            let data;
-            let temp;
-            let stationName;
-            let windSpeed;
-            let rainFall;
-            Papa.parse("http://www.zamg.ac.at/ogd/", {
+    <script>
+      //"http://www.zamg.ac.at/ogd/"
+      let data;
+      let temp;
+      let stationName;
+      let windSpeed;
+      let rainFall;
+      /* Papa.parse("http://www.zamg.ac.at/ogd/", {
 	                    download: true,
                         delimiter: ";",
 	                    complete: function(results) {
@@ -87,18 +88,61 @@
                             document.getElementById("outputWindSpeed").innerHTML = windSpeed + " km/h";
                             document.getElementById("outputRainFall").innerHTML = rainFall + " m²";
 
-                            /* call function to check which weather icon to select by checking the temp and rainFall (simple) */
+                            /* call function to check which weather icon to select by checking the temp and rainFall (simple) 
                         }
-                    }); 
-                    
-        </script>
+                    });  */
 
-        <div id="output">
-            <p id="outputWeatherIcon"></p>
-            <p id="outputTemp"></p>
-            <p id="outputWindSpeed"></p>
-            <p id="outputRainFall"></p>
-        </div>
-        
-    </body>
+      //var csv is the CSV file with headers
+      //temp: 5, WG: 9, N: 12, 
+      $.ajax({
+        type: "GET",
+        url: "http://www.zamg.ac.at/ogd/",
+        dataType: "text",
+        success: function(csv) {
+          var lines = csv.split(/\r?\n|\r/);
+
+          var result = [];
+
+          var headers = lines[0].split(";");
+          //console.log(headers[5], headers[9], headers[12]);
+
+
+          /*for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentline = lines[i].split(";");
+            var jsonString = JSON.stringify(currentline);
+            //console.log(jsonString);
+
+           // console.log(currentline);
+            //console.log(JSON.parse(jsonString));
+
+            for (var j = 0; j < headers.length; j++) {
+              obj[headers[j]] = currentline[j];
+            }
+
+            result.push(obj);
+          }*/
+          let currentline = lines[1].split(";");
+          //console.log(currentline);
+          document.getElementById("outputTemp").innerHTML = currentline[5] + " °C";
+          document.getElementById("outputWindSpeed").innerHTML = currentline[9] + " km/h";
+          document.getElementById("outputRainFall").innerHTML = currentline[12] + " m²";
+
+
+          //return result; //JavaScript object
+          let data;
+          data = JSON.stringify(result); //JSON
+
+          
+        }
+      });
+    </script>
+
+    <div id="output">
+      <p id="outputWeatherIcon"></p>
+      <p id="outputTemp"></p>
+      <p id="outputWindSpeed"></p>
+      <p id="outputRainFall"></p>
+    </div>
+  </body>
 </html>
