@@ -22,10 +22,14 @@
         url: "http://www.zamg.ac.at/ogd/",
         dataType: "text",
         success: function(csv) {
+          
+          //Teilt die einzelnen Lines in ein Array
           let lines = csv.split(/\r?\n|\r/);
 
+          //macht aus der 1 Zeile (Wetter Hörsching) einen Array
           let currentline = lines[1].split(";");
 
+          //Ausgabe der Elemente
           document.getElementById("outputTemp").innerHTML = currentline[5] + " °C";
           document.getElementById("outputWindSpeed").innerHTML = currentline[9] + " km/h";
           document.getElementById("outputRainFall").innerHTML = currentline[12] + " m²";
