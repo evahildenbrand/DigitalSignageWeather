@@ -2,14 +2,38 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Test</title>
+    <title>Wetter</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <style>
+      h1{
+        text-align: center;
+      }
       #output {
         border: 1px solid black;
         margin: 0 auto;
         height: 300px;
         width: 200px;
+        font-size: 120%;
+      }
+      #imgTemp{
+        float: left;
+        width: 20%;
+        margin-right: 18%;
+        margin-left: 5%;
+      }
+      #imgWind{
+        float: left;
+        width: 22%;
+        margin-top: 5%;
+        margin-right: 15%;
+        margin-left: 5%;
+      }
+      #imgRain{
+        float: left;
+        width: 20%;
+        margin-top: 5%;
+        margin-right: 21%;
+        margin-left: 5%;
       }
     </style>
   </head>
@@ -37,11 +61,21 @@
       });
     </script>
 
+    <h1>Wetter in Linz/Hörsching</h1>
     <div id="output">
       <p id="outputWeatherIcon"></p>
-      <p id="outputTemp"></p>
-      <p id="outputWindSpeed"></p>
-      <p id="outputRainFall"></p>
+      <div>
+        <img id="imgTemp" src="./icons/thermometer.png">
+        <p id="outputTemp"></p>
+      </div>
+      <div>
+        <br><img id="imgWind" src="./icons/wind.png">
+        <p id="outputWindSpeed"></p>
+      </div>
+      <div>
+        <br><img id="imgRain" src="./icons/cloud-with-raindrops.png">
+        <p id="outputRainFall"></p>
+      </div>
     </div>
   </body>
 </html>
