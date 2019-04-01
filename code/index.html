@@ -46,17 +46,22 @@
         url: "http://www.zamg.ac.at/ogd/",
         dataType: "text",
         success: function(csv) {
-          
+          //Einlesen der Variablen
+		  let index = 1;
+		  let tempIndex = 5;
+		  let windSpeedIndex = 9;
+		  let rainFallIndex = 12;
+		  
           //Teilt die einzelnen Lines in ein Array
           let lines = csv.split(/\r?\n|\r/);
 
           //macht aus der 1 Zeile (Wetter Hörsching) einen Array
-          let currentline = lines[1].split(";");
+          let currentline = lines[index].split(";");
 
           //Ausgabe der Elemente
-          document.getElementById("outputTemp").innerHTML = currentline[5] + " °C";
-          document.getElementById("outputWindSpeed").innerHTML = currentline[9] + " km/h";
-          document.getElementById("outputRainFall").innerHTML = currentline[12] + " m²";
+          document.getElementById("outputTemp").innerHTML = currentline[tempIndex] + " °C";
+          document.getElementById("outputWindSpeed").innerHTML = currentline[windSpeedIndex] + " km/h";
+          document.getElementById("outputRainFall").innerHTML = currentline[rainFallIndex] + " m²";
         }
       });
     </script>
