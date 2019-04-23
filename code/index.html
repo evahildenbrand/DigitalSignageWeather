@@ -38,6 +38,7 @@
         margin-right: 21%;
         margin-left: 5%;
       }
+
     </style>
   </head>
   <body>
@@ -82,6 +83,29 @@
             currentline[rainFallIndex] + " m²";
         }
       });
+
+      function updateBackground() {
+        var hr = (new Date()).getHours();
+        var body = document.body;
+        var bstyle = body.style; 
+          
+        if (hr >= 19 && hr < 21 || hr >= 5 && hr < 7) {
+          bstyle.backgroundColor = "#0059b3";
+          bstyle.color = "black";
+        } else if (hr >= 21 && hr < 5) {
+          bstyle.backgroundColor = "#000066";
+          bstyle.color = "white";
+        } else if (hr >= 7 && hr < 19){
+          bstyle.backgroundColor = "#ccefff";
+          bstyle.color = "black";
+        }else{
+          bstyle.backgroundColor = "white";
+          bstyle.color = "black";
+        } 
+      }
+
+      setInterval(updateBackground, 1000 * 60);
+      updateBackground();
     </script>
 
     <!--
