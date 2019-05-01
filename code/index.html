@@ -54,6 +54,7 @@
         margin: 0;
         font-family: sans-serif;
         text-align: center;
+        /*overflow: hidden;*/
       }
       .section {
         padding-top: 75px;
@@ -298,7 +299,6 @@
       }
 
       //"http://www.zamg.ac.at/ogd/"
-      //temp: 5, WG: 9, N: 12,
       $.ajax({
         type: "GET",
         url: "http://www.zamg.ac.at/ogd/",
@@ -326,30 +326,48 @@
         }
       });
 
+      //Hintergrund je nach Zeit ändern
       function updateBackground() {
+        //Aktuelle Stunde herausfinden
         var hr = new Date().getHours();
         var body = document.body;
         var bstyle = body.style;
 
+        //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr blauer Hintergrund
         if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
           bstyle.backgroundColor = "#0059b3";
           bstyle.color = "black";
+        //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund 
         } else if (hr >= 21 || hr < 5) {
           bstyle.backgroundColor = "#000066";
           bstyle.color = "white";
+        //Zwischen 7 und 19 Uhr hellblauer Hintergrund
         } else if (hr >= 7 && hr < 19) {
           bstyle.backgroundColor = "#ccefff";
           bstyle.color = "black";
           updateImage();
+        //Sonst weißer Hintergrund
         } else {
           bstyle.backgroundColor = "white";
           bstyle.color = "black";
         }
       }
+      //Jede Minute die Funktion updateBackground aufrufen
       setInterval(updateBackground, 1000 * 60);
       updateBackground();
 
+      setInterval(updateImage, 1000 * 60);
+      updateImage();
+
       function updateImage() {
+        var hr = new Date().getHours();
+        var page = document.getElementById("fullpage");
+
+        if(hr > 14){
+          page.classList.add("night");
+        }else{
+          page.classList.remove("night");
+        }
         /*  if ($("#fullpage").hasClass("night")) {
             $("#fullpage").removeClass("night");
           } else {
@@ -358,30 +376,12 @@
       }
     </script>
 
-    <!--
-      Link für die Icons: https://www.flaticon.com/packs/atmosphere
-      Da wir bei diesen Icons den Autor crediten müssen, suchen wir uns andere open source icons.
-    -->
-
-    <!--     <h1>Wetter in Linz/Hörsching</h1>
-    <div id="output">
-      <div>
-        <img id="imgTemp" src="./icons/thermometer.png" /> 
-        <p id="outputTemp"></p>
-      </div>
-      <div>
-            <br /><img id="imgWind" src="./icons/wind.png" />
-        <p id="outputWindSpeed"></p>
-      </div>
-      <div>
-                <br /><img id="imgRain" src="./icons/cloud-with-raindrops.png" />
-        <p id="outputRainFall"></p> 
-      </div>
-    </div> -->
     <div id="fullpage">
       <div class="section">
         <div class="time-circle">
           <p id="outputTemp"></p>
+          <!-- <p id="outputWindSpeed"></p>
+          <p id="outputRainFall"></p> -->
           <div class="sun"></div>
           <div class="moon">
             <div></div>
@@ -400,6 +400,9 @@
           <div class="water"></div>
         </div>
       </div>
+    </div>
+    <div id="switch">
+      <div id="circle"></div>
     </div>
   </body>
 </html>
