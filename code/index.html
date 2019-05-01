@@ -58,7 +58,7 @@
         padding-top: 40px;
         font-size: 1em;
         text-align: center;
-        background: #f1ede3;
+        /*         background: #f1ede3; */
         width: 100%;
         height: 800px;
         color: #555;
@@ -70,12 +70,13 @@
         background: #080d17;
         color: #e9e5d5;
       }
-      .night #intro-text {
-        color: #e9e5d5;
-      }
       .time-circle {
         position: relative;
-        background: linear-gradient(to bottom, #be4405, #f6c60c);
+        background: linear-gradient(
+          to bottom,
+          #be4405,
+          #f6c60c
+        ); /* Hintergrund-Farbverlauf für "Sonnenaufgang" */
         width: 400px;
         height: 400px;
         border-radius: 50%;
@@ -278,7 +279,7 @@
           )
           repeat scroll 0 0 #1d425a;
       }
-      #outputTemp{
+      #outputTemp {
         font-size: 40px;
       }
     </style>
@@ -327,27 +328,35 @@
       });
 
       function updateBackground() {
-        var hr = (new Date()).getHours();
+        var hr = new Date().getHours();
         var body = document.body;
-        var bstyle = body.style; 
-          
-        if (hr >= 19 && hr < 21 || hr >= 5 && hr < 7) {
+        var bstyle = body.style;
+
+        if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
           bstyle.backgroundColor = "#0059b3";
           bstyle.color = "black";
         } else if (hr >= 21 || hr < 5) {
           bstyle.backgroundColor = "#000066";
           bstyle.color = "white";
-        } else if (hr >= 7 && hr < 19){
+        } else if (hr >= 7 && hr < 19) {
           bstyle.backgroundColor = "#ccefff";
           bstyle.color = "black";
-        }else{
+          updateImage();
+        } else {
           bstyle.backgroundColor = "white";
           bstyle.color = "black";
-        } 
+        }
       }
-
       setInterval(updateBackground, 1000 * 60);
       updateBackground();
+
+      function updateImage() {
+        /*  if ($("#fullpage").hasClass("night")) {
+            $("#fullpage").removeClass("night");
+          } else {
+            $("#fullpage").addClass("night");
+          } */
+      }
     </script>
 
     <!--
@@ -373,7 +382,7 @@
     <div id="fullpage">
       <div class="section">
         <div class="time-circle">
-            <p id="outputTemp"></p>
+          <p id="outputTemp"></p>
           <div class="sun"></div>
           <div class="moon">
             <div></div>
