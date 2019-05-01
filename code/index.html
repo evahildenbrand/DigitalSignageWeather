@@ -247,10 +247,10 @@
         }
       });
 
-      //Hintergrund je nach Zeit ändern
+      //Hintergrundfarbe je nach Zeit ändern
       function updateBackground() {
-        //Aktuelle Stunde herausfinden
-        var hr = new Date().getHours();
+        //Einlesen der Variablen
+        var hr = new Date().getHours(); //Aktuelle Stunde herausfinden
         var body = document.body;
         var bstyle = body.style;
 
@@ -277,14 +277,19 @@
       setInterval(updateBackground, 1000 * 60);
       updateBackground();
 
+      //Jede Minute die Funktion updateImage aufrufen
       setInterval(updateImage, 1000 * 60);
 
+      //Mond bzw. Sonne je nach Zeit ändern
       function updateImage() {
-        var hr = new Date().getHours();
+        //Einlesen der Variablen
+        var hr = new Date().getHours(); //Aktuelle Stunde ermitteln
         var page = document.getElementById("fullpage");
 
+        //Zwischen 21 und 5 Uhr Mond anzeigen
         if(hr >= 21 || hr <= 5){
           page.classList.add("night");
+        //Ansonsten Sonne anzeigen
         }else{
           page.classList.remove("night");
         }
