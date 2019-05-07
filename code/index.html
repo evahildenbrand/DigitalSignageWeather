@@ -5,9 +5,10 @@
     <title>Wetter</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <script src="https://d3js.org/d3.v5.min.js"></script>
   </head>
   
-  <body onload="updateImage();">
+  <body>
     <script>
       //Stündliche aktualisierung der Daten
       $(document).ready(function() {
@@ -22,11 +23,15 @@
       }
 
       //"http://www.zamg.ac.at/ogd/"
-      $.ajax({
-        type: "GET",
-        url: "http://www.zamg.ac.at/ogd/",
-        dataType: "text",
-        success: function(csv) {
+    let url = "http://www.zamg.ac.at/ogd/";
+
+      Promise.all([
+        "tawes1h.csv",
+        "http://www.zamg.ac.at/ogd/"
+      ].map(function(url) {
+        return fetch(url).then(function(response) {
+          return response.ok ? response.text() : Promise.reject(response.status);
+        }).then(function(text) {
           //Einlesen der Variablen
           let index = 1;
           let tempIndex = 5;
@@ -34,7 +39,7 @@
           let rainFallIndex = 12;
 
           //Teilt die einzelnen Lines in ein Array
-          let lines = csv.split(/\r?\n|\r/);
+          let lines = text.split(/\r?\n|\r/);
 
           //macht aus der 1 Zeile (Wetter Hörsching) einen Array
           let currentline = lines[index].split(";");
@@ -46,8 +51,8 @@
             currentline[windSpeedIndex] + " km/h";
           document.getElementById("outputRainFall").innerHTML =
             currentline[rainFallIndex] + " L/m²";
-        }
-      });
+        });
+      }));
 
       //Hintergrundfarbe je nach Zeit ändern
       function updateBackground() {
