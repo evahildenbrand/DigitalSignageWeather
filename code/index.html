@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <title>Wetter</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./rainyday.min.js"></script>
   </head>
-  
+
   <body>
     <script>
       //Stündliche aktualisierung der Daten
@@ -22,37 +22,46 @@
         window.location.reload(true);
       }
 
-      //"http://www.zamg.ac.at/ogd/"
-    let url = "http://www.zamg.ac.at/ogd/";
+      let url = "http://www.zamg.ac.at/ogd/";
+      let rain;
 
-      Promise.all([
-        "tawes1h.csv",
-        "http://www.zamg.ac.at/ogd/"
-      ].map(function(url) {
-        return fetch(url).then(function(response) {
-          return response.ok ? response.text() : Promise.reject(response.status);
-        }).then(function(text) {
-          //Einlesen der Variablen
-          let index = 1;
-          let tempIndex = 5;
-          let windSpeedIndex = 9;
-          let rainFallIndex = 12;
+      Promise.all(
+        ["tawes1h.csv", "http://www.zamg.ac.at/ogd/"].map(function(url) {
+          return fetch(url)
+            .then(function(response) {
+              return response.ok
+                ? response.text()
+                : Promise.reject(response.status);
+            })
+            .then(function(text) {
+              //Einlesen der Variablen
+              let index = 1;
+              let tempIndex = 5;
+              let windSpeedIndex = 9;
+              let rainFallIndex = 12;
 
-          //Teilt die einzelnen Lines in ein Array
-          let lines = text.split(/\r?\n|\r/);
+              //Teilt die einzelnen Lines in ein Array
+              let lines = text.split(/\r?\n|\r/);
 
-          //macht aus der 1 Zeile (Wetter Hörsching) einen Array
-          let currentline = lines[index].split(";");
+              //macht aus der 1 Zeile (Wetter Hörsching) einen Array
+              let currentline = lines[index].split(";");
 
-          //Ausgabe der Elemente
-          document.getElementById("outputTemp").innerHTML =
-            currentline[tempIndex] + " °C";
-          document.getElementById("outputWindSpeed").innerHTML =
-            currentline[windSpeedIndex] + " km/h";
-          document.getElementById("outputRainFall").innerHTML =
-            currentline[rainFallIndex] + " L/m²";
-        });
-      }));
+              //Ausgabe der Elemente
+              document.getElementById("outputTemp").innerHTML =
+                currentline[tempIndex] + " °C";
+              document.getElementById("outputWindSpeed").innerHTML =
+                currentline[windSpeedIndex] + " km/h";
+              document.getElementById("outputRainFall").innerHTML =
+                currentline[rainFallIndex] + " L/m²";
+
+              rain = currentline[rainFallIndex];
+
+              if (rain > "0") {
+                updateImage();
+              }
+            });
+        })
+      );
 
       //Hintergrundfarbe je nach Zeit ändern
       function updateBackground() {
@@ -65,16 +74,16 @@
         if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
           bstyle.backgroundColor = "#0059b3";
           bstyle.color = "black";
-        //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund 
+          //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
         } else if (hr >= 21 || hr < 5) {
           bstyle.backgroundColor = "#000066";
           bstyle.color = "white";
-        //Zwischen 7 und 19 Uhr hellblauer Hintergrund
+          //Zwischen 7 und 19 Uhr hellblauer Hintergrund
         } else if (hr >= 7 && hr < 19) {
           bstyle.backgroundColor = "#ccefff";
           bstyle.color = "black";
           updateImage();
-        //Sonst weißer Hintergrund
+          //Sonst weißer Hintergrund
         } else {
           bstyle.backgroundColor = "white";
           bstyle.color = "black";
@@ -94,23 +103,41 @@
         var page = document.getElementById("fullpage");
 
         //Zwischen 21 und 5 Uhr Mond anzeigen
-        if(hr >= 21 || hr <= 5){
+        if (hr >= 21 || hr <= 5) {
           page.classList.add("night");
-        //Ansonsten Sonne anzeigen
-        }else{
+          //Ansonsten Sonne anzeigen
+        } else {
           page.classList.remove("night");
         }
 
+        if (rain > "0") {
+          /*var image = document.getElementById("background");
+          image.onload = function() {
+            var engine = new RainyDay({
+              image: this
+            });
+            engine.rain([[3, 2, 2]], 100);
+          };
+          image.crossOrigin = "anonymous";
+          image.src = "http://i.imgur.com/U1Tqqdw.jpg";*/
+
+          document.getElementById('circle').style.background = '#cccccc';
+          document.getElementById('sun').style.background = '#cccccc';
+        }else{
+          document.getElementById('circle').style.background = '#';
+          document.getElementById('sun').style.background = '#f2ef88';
+        }
       }
     </script>
+<!--<img id='background' src="">-->
 
     <div id="fullpage">
       <div class="section">
-        <div class="time-circle">
+        <div id="circle">
           <p id="outputTemp"></p>
           <p id="outputWindSpeed"></p>
           <p id="outputRainFall"></p>
-          <div class="sun"></div>
+          <div id="sun"></div>
           <div class="moon">
             <div></div>
             <div></div>
@@ -129,6 +156,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>
