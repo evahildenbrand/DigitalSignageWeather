@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="./rainyday.min.js"></script>
+    <script src="./Data.js"></script>
   </head>
 
   <body>
@@ -25,7 +26,7 @@
       let url = "http://www.zamg.ac.at/ogd/";
       let rain;
 
-      Promise.all(
+/*       Promise.all(
         ["tawes1h.csv", "http://www.zamg.ac.at/ogd/"].map(function(url) {
           return fetch(url)
             .then(function(response) {
@@ -61,8 +62,14 @@
               }
             });
         })
-      );
+      ); */
+      const data = new Data();
+      let dataArray = data.getData();
+      console.log(dataArray);
 
+
+
+      
       //Hintergrundfarbe je nach Zeit ändern
       function updateBackground() {
         //Einlesen der Variablen
@@ -121,15 +128,15 @@
           image.crossOrigin = "anonymous";
           image.src = "http://i.imgur.com/U1Tqqdw.jpg";*/
 
-          document.getElementById('circle').style.background = '#cccccc';
-          document.getElementById('sun').style.background = '#cccccc';
-        }else{
-          document.getElementById('circle').style.background = '#';
-          document.getElementById('sun').style.background = '#f2ef88';
+          document.getElementById("circle").style.background = "#cccccc";
+          document.getElementById("sun").style.background = "#cccccc";
+        } else {
+          document.getElementById("circle").style.background = "#";
+          document.getElementById("sun").style.background = "#f2ef88";
         }
       }
     </script>
-<!--<img id='background' src="">-->
+    <!--<img id='background' src="">-->
 
     <div id="fullpage">
       <div class="section">
