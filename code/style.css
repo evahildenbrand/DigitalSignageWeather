@@ -194,7 +194,7 @@ body {
     top: 55%;
 }
 
-.water {
+#water {
     position: absolute;
     background-image: radial-gradient(
         ellipse farthest-corner at center -400%,
@@ -206,7 +206,7 @@ body {
     top: 68%;
 }
       
-.night .water {
+.night #water {
     background-image: radial-gradient(
         ellipse farthest-corner at center -400%,
         #7fa1bb 30%,
