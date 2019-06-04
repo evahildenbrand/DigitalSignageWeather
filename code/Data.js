@@ -3,6 +3,8 @@ class Data {
   getData() {
     let currentline;
     let lines;
+    let index = 1;
+
     $.ajax({
       type: "GET",
       url: "http://www.zamg.ac.at/ogd/",
@@ -13,8 +15,10 @@ class Data {
 
         //macht aus der 1 Zeile (Wetter Hörsching) einen Array
         currentline = lines[index].split(";");
-        return currentline;
+                
       }
     });
+
+    return currentline;
   }
 }
