@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Wetter</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="./rainyday.min.js"></script>
-    <script src="./Data.js"></script>
+    <link rel="stylesheet" href="rain.css">
   </head>
 
-  <body>
+  <body onload="updateBackground();">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="./Data.js"></script>
+
     <script>
       //Stündliche aktualisierung der Daten
       $(document).ready(function() {
         setInterval(function() {
           reload_page();
+          
           // alert("It worked");
         }, 60 * 60000); //1 Stunde
       });
@@ -26,50 +28,41 @@
       let url = "http://www.zamg.ac.at/ogd/";
       let rain;
 
-/*       Promise.all(
-        ["tawes1h.csv", "http://www.zamg.ac.at/ogd/"].map(function(url) {
-          return fetch(url)
-            .then(function(response) {
-              return response.ok
-                ? response.text()
-                : Promise.reject(response.status);
-            })
-            .then(function(text) {
-              //Einlesen der Variablen
-              let index = 1;
-              let tempIndex = 5;
-              let windSpeedIndex = 9;
-              let rainFallIndex = 12;
+      const pageWidth = window.innerWidth;
+      const pageHeight = window.innerHeight;
+      const defaultDropNum = 100;
 
-              //Teilt die einzelnen Lines in ein Array
-              let lines = text.split(/\r?\n|\r/);
+     /* const data = new Data();
+        let dataArray = data.getData();
+        console.log(dataArray);*/
 
-              //macht aus der 1 Zeile (Wetter Hörsching) einen Array
-              let currentline = lines[index].split(";");
+      $.ajax({
+        type: "GET",
+        url: "http://www.zamg.ac.at/ogd/",
+        dataType: "text",
+        success: function(csv) {
+          let lines = csv.split(/\r?\n|\r/);
+          let index = 1;
+          let currentLine = lines[index].split(";");
 
-              //Ausgabe der Elemente
-              document.getElementById("outputTemp").innerHTML =
-                currentline[tempIndex] + " °C";
-              document.getElementById("outputWindSpeed").innerHTML =
-                currentline[windSpeedIndex] + " km/h";
-              document.getElementById("outputRainFall").innerHTML =
-                currentline[rainFallIndex] + " L/m²";
+          let outputTempIndex = 5;
+          document.getElementById("outputTemp").innerHTML =
+            currentLine[outputTempIndex] + " °C";
+          let outputWindSpeedIndex = 9;
+          document.getElementById("outputWindSpeed").innerHTML =
+            currentLine[outputWindSpeedIndex] + "  km/h";
+          let outputRainFallIndex = 12;
+          document.getElementById("outputRainFall").innerHTML =
+            currentLine[outputRainFallIndex] + "  m²";
 
-              rain = currentline[rainFallIndex];
+          rain = currentLine[outputRainFallIndex];
+          if(rain > "0"){
+            updateImage();
+          }
+        }
+      });
+     
 
-              if (rain > "0") {
-                updateImage();
-              }
-            });
-        })
-      ); */
-      const data = new Data();
-      let dataArray = data.getData();
-      console.log(dataArray);
-
-
-
-      
       //Hintergrundfarbe je nach Zeit ändern
       function updateBackground() {
         //Einlesen der Variablen
@@ -98,7 +91,6 @@
       }
       //Jede Minute die Funktion updateBackground aufrufen
       setInterval(updateBackground, 1000 * 60);
-      updateBackground();
 
       //Jede Minute die Funktion updateImage aufrufen
       setInterval(updateImage, 1000 * 60);
@@ -117,26 +109,51 @@
           page.classList.remove("night");
         }
 
+        //Wenn es regnet ...
         if (rain > "0") {
-          /*var image = document.getElementById("background");
-          image.onload = function() {
-            var engine = new RainyDay({
-              image: this
-            });
-            engine.rain([[3, 2, 2]], 100);
-          };
-          image.crossOrigin = "anonymous";
-          image.src = "http://i.imgur.com/U1Tqqdw.jpg";*/
-
+          //grauer Kreis
           document.getElementById("circle").style.background = "#cccccc";
+          //keine Sonne
           document.getElementById("sun").style.background = "#cccccc";
+          //Sonne nicht im Wasser spiegeln
+          document.getElementById("water").style.background = "radial-gradient(ellipse farthest-corner at center -400%,#cccccc 30%,#518eac 90%)";
+          //keinen Mond
+          page.classList.remove("night");
+
+          //Regen anzeigen
+          makeItRain(defaultDropNum);
+        //... sonst  
         } else {
-          document.getElementById("circle").style.background = "#";
+          document.getElementById("circle").style.background = "linear-gradient(to bottom, #be4405, #f6c60c)";
           document.getElementById("sun").style.background = "#f2ef88";
+          document.getElementById("water").style.background = "radial-gradient(ellipse farthest-corner at center -400%,#f5c30e 30%,#518eac 90%)";
         }
+
+        //Funktion für den Regen
+        function makeItRain (num) {
+
+          let elements = document.getElementById("drops-section");
+
+          while (elements.hasChildNodes()) {
+            elements.removeChild(elements.lastChild);
+          }
+          for (let i = 0 ; i < num ; i ++) {
+            let randomX = Math.floor(Math.random() * (pageWidth));
+            let randomY = Math.floor(Math.random() * (pageHeight));
+            let dropSpeed = Math.floor(Math.random() * (25 - 5)) + 5;
+            let dropWidth = Math.floor(Math.random() * (dropSpeed/10 - 1)) + 1;
+            let dropHeight = Math.floor(Math.random() * (dropSpeed*2 - 3)) + 3;
+            let d = new Drop(randomX, randomY, dropSpeed, dropWidth, dropHeight);
+
+            d.show();
+            d.fall();
+
+          }
+
+        }
+
       }
     </script>
-    <!--<img id='background' src="">-->
 
     <div id="fullpage">
       <div class="section">
@@ -159,9 +176,14 @@
             <div></div>
             <div></div>
           </div>
-          <div class="water"></div>
+          <div id="water"></div>
         </div>
       </div>
     </div>
+
+    <div id="drops-section"></div>
+      
+    <!--Klasse für die Regentropfen einbinden-->
+    <script src="Drop.js"></script>   
   </body>
 </html>
