@@ -8,10 +8,7 @@
   </head>
 
   <body onload="updateBackground();">
-    <script
-      type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"
-    ></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="./Data.js"></script>
 
     <script>
@@ -56,9 +53,10 @@
             currentLine[outputWindSpeedIndex] + "  km/h";
           let outputRainFallIndex = 12;
           document.getElementById("outputRainFall").innerHTML =
-            currentLine[outputRainFallIndex] + "  m²";
+            currentLine[outputRainFallIndex] + "  l/m²";
 
           rain = currentLine[outputRainFallIndex];
+
           if (rain > "0") {
             updateImage();
           }
@@ -76,15 +74,17 @@
         if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
           bstyle.backgroundColor = "#0059b3";
           bstyle.color = "black";
+          bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
           //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
         } else if (hr >= 21 || hr < 5) {
           bstyle.backgroundColor = "#000066";
           bstyle.color = "white";
+          bstyle.backgroundImage = "url('./images/bgNight.jpg')";
           //Zwischen 7 und 19 Uhr hellblauer Hintergrund
         } else if (hr >= 7 && hr < 19) {
           bstyle.backgroundColor = "#ccefff";
           bstyle.color = "black";
-          updateImage();
+          bstyle.backgroundImage = "url('./images/bgDay.jpg')";
           //Sonst weißer Hintergrund
         } else {
           bstyle.backgroundColor = "white";
@@ -95,7 +95,7 @@
       setInterval(updateBackground, 1000 * 60);
 
       //Jede Minute die Funktion updateImage aufrufen
-      setInterval(updateImage, 1000 * 60);
+      /*setInterval(updateImage, 1000 * 60);
 
       //Mond bzw. Sonne je nach Zeit ändern
       function updateImage() {
@@ -166,43 +166,26 @@
             d.fall();
           }
         }
-      }
+      }*/
     </script>
 
-    <!--     <div id="fullpage">
-      <div class="section">
-        <div id="circle">
-
-          <div id="sun"></div>
-          <div class="moon">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <div class="stars">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <div id="water"></div>
-        </div>
-      </div>
-    </div> -->
     <div id="weatherContainer">
       <p id="location">
         Leonding <br>
         <span>Heute</span>
       </p>
       <div id="tempContainer">
-        <img src="icons/sunny-day-weather-symbol.png" width="50px" height="50px">
+        <img id="imgTemp" src="./icons/thermometer.png" />
         <p id="outputTemp"></p>
+      </div><br>
+      <div id="windContainer">
+        <img id="imgWind" src="./icons/wind.png" />
+        <p id="outputWindSpeed"></p>
+      </div><br>
+      <div id="rainFallContainer">
+        <br><img id="imgRain" src="./icons/cloud-with-raindrops.png" />
+        <p id="outputRainFall"></p>
       </div>
-      <p id="outputWindSpeed"></p> <br>
-      <p id="outputRainFall"></p>
     </div>
 
     <div id="drops-section"></div>
