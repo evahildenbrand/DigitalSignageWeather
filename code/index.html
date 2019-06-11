@@ -58,7 +58,7 @@
           rain = currentLine[outputRainFallIndex];
 
           if (rain > "0") {
-            updateImage();
+            updateBackground();
           }
         }
       });
@@ -70,27 +70,33 @@
         var body = document.body;
         var bstyle = body.style;
 
-        //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr blauer Hintergrund
-        if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
-          //bstyle.backgroundColor = "#0059b3";
-          bstyle.color = "black";
-          bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
-          //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
-        } else if (hr >= 21 || hr < 5) {
-          //bstyle.backgroundColor = "#000066";
-          bstyle.color = "white";
-          bstyle.backgroundImage = "url('./images/bgNight.jpg')";
-          //Zwischen 7 und 19 Uhr hellblauer Hintergrund
-        } else if (hr >= 7 && hr < 19) {
-          //bstyle.backgroundColor = "#ccefff";
-          bstyle.color = "black";
-          bstyle.backgroundImage = "url('./images/bgDay.jpg')";
-          //Sonst weißer Hintergrund
-        } else {
-          //bstyle.backgroundColor = "white";
-          bstyle.color = "black";
+        if(rain > "0"){
+          bstyle.backgroundImage = "url('./images/bgRain.jpg')";
+          makeItRain(defaultDropNum);
+        }else{
+          //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr blauer Hintergrund
+          if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
+            bstyle.backgroundColor = "#0059b3";
+            bstyle.color = "black";
+            bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
+            //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
+          } else if (hr >= 21 || hr < 5) {
+            bstyle.backgroundColor = "#000066";
+            bstyle.color = "white";
+            bstyle.backgroundImage = "url('./images/bgNight.jpg')";
+            //Zwischen 7 und 19 Uhr hellblauer Hintergrund
+          } else if (hr >= 7 && hr < 19) {
+            bstyle.backgroundColor = "#ccefff";
+            bstyle.color = "black";
+            bstyle.backgroundImage = "url('./images/bgDay.jpg')";
+            //Sonst weißer Hintergrund
+          } else {
+            bstyle.backgroundColor = "white";
+            bstyle.color = "black";
+          }
         }
       }
+        
       //Jede Minute die Funktion updateBackground aufrufen
       setInterval(updateBackground, 1000 * 60);
 
@@ -139,8 +145,10 @@
             "radial-gradient(ellipse farthest-corner at center -400%,#f5c30e 30%,#518eac 90%)";
         }
 
-        //Funktion für den Regen
-        function makeItRain(num) {
+      }*/
+
+      //Funktion für den Regen
+      function makeItRain(num) {
           let elements = document.getElementById("drops-section");
 
           while (elements.hasChildNodes()) {
@@ -166,7 +174,6 @@
             d.fall();
           }
         }
-      }*/
     </script>
 
     <div id="weatherContainer">
