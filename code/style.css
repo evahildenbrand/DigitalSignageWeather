@@ -220,3 +220,21 @@ body {
     font-size: 190%;
     z-index: 1
 }
+#weatherContainer{
+    width: 400px;
+    background-color: red;
+    margin: 7%;
+}
+#tempContainer{
+    width: 300px;
+    background-color: blue;
+}
+#tempContainer img, p{
+    display:inline-block;
+}
+#location span{
+    font-size: 15px;
+}
+#location{
+    font-size: 25px;
+}
