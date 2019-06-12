@@ -36,8 +36,8 @@ body {
     text-shadow: 2px 2px 4px #000000;
 }
 
-#tempContainer #sunIcon, #outputTemp{
-    display:inline-block;
+#tempContainer #sunIcon, #tempContainer #moonIcon, #outputTemp{
+    display: inline-block;
     margin-top: -10%;
     float: right;
     margin-left: 3%;
@@ -52,17 +52,25 @@ body {
     margin-top: -2%;
 }
 
-#sunIcon, #windIcon, #rainIcon{
+#sunIcon, #windIcon, #rainIcon, #moonIcon{
     font-size: 300%;
     text-shadow: 2px 2px 4px #000000;
 }
 
-#sunIcon, #outputTemp{
+#sunIcon, #outputTemp, #moonIcon{
     font-size: 500% !important;
 }
 
-#sunIcon{
+#sunIcon, #moonIcon{
     color: #ffff99;
+}
+
+#moonIcon{
+    opacity: 0;
+}
+
+#sunIcon{
+    margin-right: -15%;
 }
 
 #windIcon, #rainIcon{
