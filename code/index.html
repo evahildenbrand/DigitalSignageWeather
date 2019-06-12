@@ -93,17 +93,26 @@
             bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
             document.getElementById("weatherContainer").style.border = "white 5px solid";
+
+            document.getElementById("sunIcon").style.opacity = 1;
+            document.getElementById("moonIcon").style.opacity = 0;
             //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
           } else if (hr >= 21 || hr < 5) {
             bstyle.backgroundColor = "#000066";
             bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgNight.jpg')";
             document.getElementById("weatherContainer").style.border = "white 5px solid";
+
+            document.getElementById("sunIcon").style.opacity = 0;
+            document.getElementById("moonIcon").style.opacity = 1;
             //Zwischen 7 und 19 Uhr hellblauer Hintergrund
           } else if (hr >= 7 && hr < 19) {
             bstyle.backgroundColor = "#ccefff";
             bstyle.color = "black";
             bstyle.backgroundImage = "url('./images/bgDay.jpg')";
+
+            document.getElementById("sunIcon").style.opacity = 1;
+            document.getElementById("moonIcon").style.opacity = 0;
             //Sonst weißer Hintergrund
           } else {
             bstyle.backgroundColor = "white";
@@ -201,9 +210,10 @@
       <div id="tempContainer">
         <!-- <img id="imgTemp" src="./icons/thermometer.png" /> -->
         <!-- <i class="fas fa-thermometer-half"style="font-size:60px;color:yellow;"></i> -->
-        <!--  <i class="fas fa-moon"style="font-size:60px;color:yellow;"></i> 	 -->
+        	
         <p id="outputTemp"></p>
-        <i id="sunIcon" class="material-icons">wb_sunny</i>
+        <i id="moonIcon" class="fas fa-moon"></i> 
+        <i id="sunIcon" class="material-icons">wb_sunny</i><br>
       </div><br>
       <div id="windContainer">
         <!-- <img id="imgWind" src="./icons/wind.png" /> -->
