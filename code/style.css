@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
-    text-align: center;
+    /* text-align: center; */
     overflow: hidden;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -15,11 +15,16 @@ body {
 }
 
 #weatherContainer{
-    width: 30%;
-    border: black 10px solid;
+    width: 40%;
+    height: 5%;
+    border: black 5px solid;
     border-radius: 15px;
     box-shadow: 3px 4px 8px 0 rgba(0, 0, 0, 0.692), 0 6px 20px 0 rgba(255, 255, 255, 0.295);
-    margin: 3% 0 0 18%;
+    margin-left: 3%;
+    margin-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    /* margin: 3% 0 0 18%; */
     /*margin: 7%;*/
 }
 
@@ -31,39 +36,60 @@ body {
     text-shadow: 2px 2px 4px #000000;
 }
 
-/* #tempContainer{
-    width: 300px;
-    background-color: blue;
-} */
-#tempContainer #imgTemp, #outputTemp{
+#tempContainer #sunIcon, #outputTemp{
+    display:inline-block;
+    margin-top: -10%;
+    float: right;
+    margin-left: 3%;
+}
+
+#windContainer #windIcon, #outputWindSpeed{
     display:inline-block;
 }
+
+#rainFallContainer #rainIcon, #outputRainFall{
+    display:inline-block;
+    margin-top: -2%;
+}
+
+#sunIcon, #windIcon, #rainIcon{
+    font-size: 300%;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#sunIcon, #outputTemp{
+    font-size: 500% !important;
+}
+
+#sunIcon{
+    color: #ffff99;
+}
+
+#windIcon, #rainIcon{
+    color: #cccccc;
+    margin-right: 3%;
+}
+/*
 #imgTemp {
     float: left;
     width: 10%;
 }
 
-#windContainer #imgWind, #outputWindSpeed{
-    display:inline-block;
-}
 #imgWind {
     float: left;
     width: 10%;
 }
 
-#rainFallContainer #imgRain, #outputRainFall{
-    display:inline-block;
-}
 #imgRain {
     float: left;
     width: 10%;
 }
 
- #imgTemp, #imgWind, #imgRain{
+#imgTemp, #imgWind, #imgRain{
     margin: 3% 0% 0% 15%;
     padding: 3%;
     border: solid 1px black;
     border-radius: 15px;
     box-shadow: 3px 4px 8px 0 rgba(0, 0, 0, 0.692), 0 6px 20px 0 rgba(17, 17, 17, 0.295);
- }
+}  */
 
