@@ -5,6 +5,8 @@
     <title>Wetter</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="rain.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
   </head>
 
   <body onload="updateBackground();">
@@ -66,9 +68,20 @@
       //Hintergrundfarbe je nach Zeit ändern
       function updateBackground() {
         //Einlesen der Variablen
-        var hr = new Date().getHours(); //Aktuelle Stunde herausfinden
-        var body = document.body;
-        var bstyle = body.style;
+        let hr = new Date().getHours(); //Aktuelle Stunde herausfinden
+        let body = document.body;
+        let bstyle = body.style;
+        let actualHour = new Date().getHours();
+        let actualMinutes = new Date().getMinutes();
+
+        if(actualHour < 10){
+          actualHour = "0" + actualHour;
+        }
+        if(actualMinutes < 10){
+          actualMinutes = "0" + actualMinutes;
+        }
+
+        document.getElementById("time").innerHTML = "" + actualHour + " : " + actualMinutes;
 
         if(rain > "0"){
           bstyle.backgroundImage = "url('./images/bgRain.jpg')";
@@ -77,13 +90,15 @@
           //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr blauer Hintergrund
           if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
             bstyle.backgroundColor = "#0059b3";
-            bstyle.color = "black";
+            bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
+            document.getElementById("weatherContainer").style.border = "white 5px solid";
             //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
           } else if (hr >= 21 || hr < 5) {
             bstyle.backgroundColor = "#000066";
             bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgNight.jpg')";
+            document.getElementById("weatherContainer").style.border = "white 5px solid";
             //Zwischen 7 und 19 Uhr hellblauer Hintergrund
           } else if (hr >= 7 && hr < 19) {
             bstyle.backgroundColor = "#ccefff";
@@ -176,21 +191,28 @@
         }
     </script>
 
+    <!-- https://www.w3schools.com/icons/icons_reference.asp -->
+
     <div id="weatherContainer">
       <p id="location">
         Leonding <br>
-        <span>Heute</span>
+        <span id="time"></span>
       </p>
       <div id="tempContainer">
-        <img id="imgTemp" src="./icons/thermometer.png" />
+        <!-- <img id="imgTemp" src="./icons/thermometer.png" /> -->
+        <!-- <i class="fas fa-thermometer-half"style="font-size:60px;color:yellow;"></i> -->
+        <!--  <i class="fas fa-moon"style="font-size:60px;color:yellow;"></i> 	 -->
         <p id="outputTemp"></p>
+        <i id="sunIcon" class="material-icons">wb_sunny</i>
       </div><br>
       <div id="windContainer">
-        <img id="imgWind" src="./icons/wind.png" />
+        <!-- <img id="imgWind" src="./icons/wind.png" /> -->
+        <i id="windIcon" class="fas fa-wind"></i>
         <p id="outputWindSpeed"></p>
       </div><br>
       <div id="rainFallContainer">
-        <img id="imgRain" src="./icons/cloud-with-raindrops.png" />
+        <!-- <img id="imgRain" src="./icons/cloud-with-raindrops.png" /> -->
+        <i id="rainIcon" class="fas fa-cloud-showers-heavy"></i>      
         <p id="outputRainFall"></p>
       </div>
     </div>
