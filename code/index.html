@@ -19,7 +19,6 @@
         setInterval(function() {
           reload_page();
 
-          // alert("It worked");
         }, 60 * 60000); //1 Stunde
       });
 
@@ -33,10 +32,6 @@
       const pageWidth = window.innerWidth;
       const pageHeight = window.innerHeight;
       const defaultDropNum = 100;
-
-      /* const data = new Data();
-        let dataArray = data.getData();
-        console.log(dataArray);*/
 
       $.ajax({
         type: "GET",
@@ -87,8 +82,8 @@
           bstyle.backgroundImage = "url('./images/bgRain.jpg')";
           makeItRain(defaultDropNum);
         }else{
-          //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr blauer Hintergrund
-          if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
+          //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr -> Dämmerung-Bild
+          if ((hr >= 19 && hr < 21) || (hr >= 21 && hr < 7)) {
             bstyle.backgroundColor = "#0059b3";
             bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
@@ -96,7 +91,7 @@
 
             document.getElementById("sunIcon").style.opacity = 1;
             document.getElementById("moonIcon").style.opacity = 0;
-            //Zwischen 21 und 5 Uhr dunkelblauer Hintergrund
+            //Zwischen 21 und 5 Uhr -> Nacht-Bild
           } else if (hr >= 21 || hr < 5) {
             bstyle.backgroundColor = "#000066";
             bstyle.color = "white";
@@ -105,7 +100,7 @@
 
             document.getElementById("sunIcon").style.opacity = 0;
             document.getElementById("moonIcon").style.opacity = 1;
-            //Zwischen 7 und 19 Uhr hellblauer Hintergrund
+            //Zwischen 7 und 19 Uhr -> Tag-Bild
           } else if (hr >= 7 && hr < 19) {
             bstyle.backgroundColor = "#ccefff";
             bstyle.color = "black";
@@ -123,53 +118,6 @@
         
       //Jede Minute die Funktion updateBackground aufrufen
       setInterval(updateBackground, 1000 * 60);
-
-      //Jede Minute die Funktion updateImage aufrufen
-      /*setInterval(updateImage, 1000 * 60);
-
-      //Mond bzw. Sonne je nach Zeit ändern
-      function updateImage() {
-        //Einlesen der Variablen
-        var hr = new Date().getHours(); //Aktuelle Stunde ermitteln
-        var page = document.getElementById("fullpage");
-
-        //Zwischen 21 und 5 Uhr Mond anzeigen
-        if (hr >= 21 || hr <= 5) {
-          page.classList.add("night");
-          //Ansonsten Sonne anzeigen
-        } else {
-          page.classList.remove("night");
-        }
-        if (hr >= 10 || hr <= 13) {
-          document.getElementById("sun").style.marginTop = "-30%";
-          document.getElementById("circle").style.background =
-            "linear-gradient(to bottom, #69DEF5, #5EC6DB)";
-        }
-
-        //Wenn es regnet ...
-        if (rain > "0") {
-          //grauer Kreis
-          document.getElementById("circle").style.background = "#cccccc";
-          //keine Sonne
-          document.getElementById("sun").style.background = "#cccccc";
-          //Sonne nicht im Wasser spiegeln
-          document.getElementById("water").style.background =
-            "radial-gradient(ellipse farthest-corner at center -400%,#cccccc 30%,#518eac 90%)";
-          //keinen Mond
-          page.classList.remove("night");
-
-          //Regen anzeigen
-          makeItRain(defaultDropNum);
-          //... sonst
-        } else {
-          document.getElementById("circle").style.background =
-            "linear-gradient(to bottom, #be4405, #f6c60c)";
-          document.getElementById("sun").style.background = "#f2ef88";
-          document.getElementById("water").style.background =
-            "radial-gradient(ellipse farthest-corner at center -400%,#f5c30e 30%,#518eac 90%)";
-        }
-
-      }*/
 
       //Funktion für den Regen
       function makeItRain(num) {
@@ -208,20 +156,15 @@
         <span id="time"></span>
       </p>
       <div id="tempContainer">
-        <!-- <img id="imgTemp" src="./icons/thermometer.png" /> -->
-        <!-- <i class="fas fa-thermometer-half"style="font-size:60px;color:yellow;"></i> -->
-        	
         <p id="outputTemp"></p>
         <i id="moonIcon" class="fas fa-moon"></i> 
         <i id="sunIcon" class="material-icons">wb_sunny</i><br>
       </div><br>
       <div id="windContainer">
-        <!-- <img id="imgWind" src="./icons/wind.png" /> -->
         <i id="windIcon" class="fas fa-wind"></i>
         <p id="outputWindSpeed"></p>
       </div><br>
       <div id="rainFallContainer">
-        <!-- <img id="imgRain" src="./icons/cloud-with-raindrops.png" /> -->
         <i id="rainIcon" class="fas fa-cloud-showers-heavy"></i>      
         <p id="outputRainFall"></p>
       </div>
