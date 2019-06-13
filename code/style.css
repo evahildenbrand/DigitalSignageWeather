@@ -16,13 +16,14 @@ body {
 #weatherContainer{
     width: 40%;
     height: 5%;
-    border: black 5px solid;
+    border: white 5px solid;
     border-radius: 15px;
     box-shadow: 3px 4px 8px 0 rgba(0, 0, 0, 0.692), 0 6px 20px 0 rgba(255, 255, 255, 0.295);
     margin-left: 3%;
     margin-top: 3%;
     padding-left: 3%;
     padding-right: 3%;
+    background-color: rgba(100,100,100,0.5);
 }
 
 #location span{
@@ -49,6 +50,10 @@ body {
     margin-top: -2%;
 }
 
+#rainFallContainer{
+    opacity: 0;
+}
+
 #sunIcon, #windIcon, #rainIcon, #moonIcon{
     font-size: 300%;
     text-shadow: 2px 2px 4px #000000;
@@ -71,6 +76,6 @@ body {
 }
 
 #windIcon, #rainIcon{
-    color: #cccccc;
+    color: #ffffff;
     margin-right: 3%;
 }
