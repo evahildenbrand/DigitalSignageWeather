@@ -1,136 +1,150 @@
 <h1>DigitalSignageWeather</h1>
+<h3>Design bei Tag:</h3>
+<img src="./images/day.png">
+<h3>Design bei Sonnenaufgang bzw. Sonnenuntergang:</h3>
+<img src="./images/twilight.png">
+<h3>Design bei Nacht</h3>
+<img src="./images/night.png">
+<h3>Design bei Regen</h3>
+<img src="./images/rain.png">
 
-<h3>Am Xibo einbinden</h3>
+<h2>Am Xibo einbinden</h3>
 <p>
     Um den Code am Xibo einzubinden, benötigt man mehrere Schritte.<br>
     Als erstes muss man die 4 Bilder aus dem images-Ordner (bgDay,bgNight,bgTwilight,bgRain) auf den Xibo hochladen.<br>
-    Dafür geht man unter den Menüpunkt "Media" und klickt auf "Add media". Es wird sich ein kleines Fenster öffnen.<br>
-    <img src="images/xiboImages_readme/bild1.PNG" alt="Menüpunkt Media">
+    Dafür geht man unter den Menüpunkt "Media" und klickt auf "Add media".<br>
+    <img src="images/xiboImages_readme/bild1.PNG" alt="Menüpunkt Media"><br>
     <img src="images/xiboImages_readme/bild2.PNG" alt="Add Media">
+    Es wird sich ein kleines Fenster öffnen.
     In diesem klickt man zuerst auf "Add files" und wählt die 4 Bilder aus. Dann drückt man auf "Start upload" und <br>
     sobald die Bilder hochgeladen sind, drückt man auf "Done".<br>
     <img src="images/xiboImages_readme/bild3.PNG" alt="Add files und start upload">
     Anschließend muss man ein neues Layout erstellen.<br>
-    Dafür geht man unter den Menüpunkt "Layouts" und klick auf "Add Layout".<br>
-    <img src="images/xiboImages_readme/bild4.PNG" alt="Menüpunkt layouts">
+    Dafür geht man unter den Menüpunkt "Layouts" und klickt auf "Add Layout".<br>
+    <img src="images/xiboImages_readme/bild4.PNG" alt="Menüpunkt layouts"><br>
     <img src="images/xiboImages_readme/bild5.PNG" alt="Add layout">
+    Auch hier wird sich wieder ein Fenster öffnen.
     Man wählt einen Namen für das Layout aus und speichert es ab.<br>
     <img src="images/xiboImages_readme/bild6.PNG" alt="Embedd code">
     Danach macht man einen Doppelklick auf die schon vorhandene Region. Auch hier öffnet sich wieder ein Fenster.<br>
     <img src="images/xiboImages_readme/bild7.PNG" alt="Layout mit region">
-    <img src="images/xiboImages_readme/bild8.PNG" alt="menü">
-    <img src="images/xiboImages_readme/bild9.PNG" alt="Menüpunkt embedded">
-    Hier geht man unter den Punkt "Embedded" und fügt den Code wie folgt ein:<br>
-</p>
-    HTML to Embed:
+    Hier geht man unter den Punkt "Embedded".
+    <img src="images/xiboImages_readme/bild8.PNG" alt="menü"><br>
+    Der Code wird dann wie folgt in die 3 Bereiche eingefügt:<br>   
+    <h3>HTML to Embed:</h3>
 
-    ````HTML
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  ```html
+         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <div id="weatherContainer">
-            <p id="location">
-                Leonding <br>
-                <span id="time"></span>
-            </p>
-            <div id="tempContainer">    	
-                <p id="outputTemp"></p>
-                <i id="moonIcon" class="fas fa-moon"></i> 
-                <i id="sunIcon" class="material-icons">wb_sunny</i><br>
-            </div><br>
-            <div id="windContainer">
-                <i id="windIcon" class="fas fa-wind"></i>
-                <p id="outputWindSpeed"></p>
-            </div><br>
-            <div id="rainFallContainer">
-                <i id="rainIcon" class="fas fa-cloud-showers-heavy"></i>
-                <p id="outputRainFall"></p>
-            </div>
+          <p id="location">
+            Leonding <br>
+            <span id="time"></span>
+          </p>
+          <div id="tempContainer">
+            <p id="outputTemp"></p>
+            <i id="moonIcon" class="fas fa-moon"></i> 
+            <i id="sunIcon" class="material-icons">wb_sunny</i><br>
+          </div><br>
+          <div id="windContainer">
+            <i id="windIcon" class="fas fa-wind"></i>
+            <p id="outputWindSpeed"></p>
+          </div><br>
+          <div id="rainFallContainer">
+            <i id="rainIcon" class="fas fa-cloud-showers-heavy"></i>
+            <p id="outputRainFall"></p>
+          </div>
         </div>
-        <div id="drops-section"></div>
-    ````
-   Custom Style Sheets:
-   
-   ````CSS
+    <div id="drops-section"> </div>
+  ```  
+   <h3>Custom Style Sheets:</h3>
+
+  ```CSS
     <style type="text/css">
-        body {
-            padding: 0;
-            margin: 0;
-            font-family: sans-serif;
-            /* text-align: center; */
-            overflow: hidden;
-            background-size: 100%;
-            background-repeat: no-repeat;
-        }
-        #outputTemp, #outputWindSpeed, #outputRainFall  {
-            font-size: 400%;
-            z-index: 1;
-            text-shadow: 2px 2px 4px #000000;
-        }
-        #weatherContainer{
-            width: 40%;
-            height: 5%;
-            border: black 5px solid;
-            border-radius: 15px;
-            box-shadow: 3px 4px 8px 0 rgba(0, 0, 0, 0.692), 0 6px 20px 0 rgba(255, 255, 255, 0.295);
-            margin-left: 3%;
-            margin-top: 2%;
-            padding-left: 3%;
-            padding-right: 3%;
-            background-color: rgba(191, 191, 191, 0.5);
-        }
-        #location span{
-            font-size: 100%;
-        }
-        #location{
-            font-size: 500%;
-            text-shadow: 2px 2px 4px #000000;
-            padding-top: 3%;
-        }
-        #tempContainer #sunIcon, #tempContainer #moonIcon, #outputTemp{
-            display: inline-block;
-            margin-top: -10%;
-            float: right;
-            margin-left: 3%;
-            font-size: 500%;
-        }
-        #windContainer #windIcon, #outputWindSpeed{
-            display:inline-block;
-        }
-        #rainFallContainer #rainIcon, #outputRainFall{
-            display:inline-block;
-            margin-top: -2%;
-        }
-        #sunIcon, #windIcon, #rainIcon, #moonIcon{
-            font-size: 300%;
-            text-shadow: 2px 2px 4px #000000;
-        }
-        #sunIcon, #outputTemp, #moonIcon{
-            font-size: 500% !important;
-        }
-        #sunIcon, #moonIcon{
-            color: #ffff99;
-        }
-        #moonIcon{
-            opacity: 0;
-        }
-        #sunIcon{
-            margin-right: -15%;
-        }
-        #windIcon, #rainIcon{
-            color: #cccccc;
-            margin-right: 3%;
-        }
-        .rainDrop {
-            position: absolute;
-            background: linear-gradient(180deg, white , black 90%, black);
-            border-radius: 100% 100% 80% 80%;
-        }
+      body {
+          padding: 0;
+          margin: 0;
+          font-family: sans-serif;
+          /* text-align: center; */
+          overflow: hidden;
+          background-size: 100%;
+          background-repeat: no-repeat;
+      }
+      #outputTemp, #outputWindSpeed, #outputRainFall  {
+          font-size: 400%;
+          z-index: 1;
+          text-shadow: 2px 2px 4px #000000;
+      }
+      #weatherContainer{
+          width: 40%;
+          height: 5%;
+          border: white 5px solid;
+          border-radius: 15px;
+          box-shadow: 3px 4px 8px 0 rgba(0, 0, 0, 0.692), 0 6px 20px 0 rgba(255, 255, 255, 0.295);
+          margin-left: 3%;
+          margin-top: 2%;
+          padding-left: 3%;
+          padding-right: 3%;
+          background-color: rgba(100,100,100,0.5);
+      }
+      #location span{
+          font-size: 100%;
+      }
+      #location{
+          font-size: 500%;
+          text-shadow: 2px 2px 4px #000000;
+          padding-top: 3%;
+      }
+      #tempContainer #sunIcon, #tempContainer #moonIcon, #outputTemp{
+          display: inline-block;
+          margin-top: -10%;
+          float: right;
+          margin-left: 3%;
+          font-size: 500%;
+      }
+      #windContainer #windIcon, #outputWindSpeed{
+          display:inline-block;
+      }
+      #rainFallContainer #rainIcon, #outputRainFall{
+          display:inline-block;
+          margin-top: -2%;
+      }
+      #rainFallContainer{
+          opacity: 0;
+      }
+      #sunIcon, #windIcon, #rainIcon, #moonIcon{
+          font-size: 300%;
+          text-shadow: 2px 2px 4px #000000;
+      }
+      #sunIcon, #outputTemp, #moonIcon{
+          font-size: 500% !important;
+      }
+      #sunIcon, #moonIcon{
+          color: #ffff99;
+      }
+      #moonIcon{
+          opacity: 0;
+      }
+      #sunIcon{
+          margin-right: -15%;
+      }
+      #windIcon, #rainIcon{
+          color: #ffffff;
+          margin-right: 3%;
+      }
+      .rainDrop {
+        position: absolute;
+        background: linear-gradient(180deg, white , black 90%, black);
+        border-radius: 100% 100% 80% 80%;
+      }
+      #drops-section{
+            height: 300%;
+      }
     </style>
-    ````
+  ```
+   <h3>HEAD content to Embed(including script tags):</h3>
 
-   HEAD content to Embed(including script tags):
-
-`   ```Javascript
+  ```javascript
    <script type="text/javascript">
     function EmbedInit()
     {
@@ -202,14 +216,15 @@
         document.getElementById("time").innerHTML = "" + actualHour + " : " + actualMinutes;
 
         if(rain > "0"){
-          bstyle.backgroundImage = "url('[79]')";
+          bstyle.backgroundImage = "url('[BILDID_Rain]')";
+          document.getElementById("rainFallContainer").style.opacity = 1;
           makeItRain(defaultDropNum);
         }else{
           //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr blauer Hintergrund
           if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
             bstyle.backgroundColor = "#0059b3";
             bstyle.color = "white";
-            bstyle.backgroundImage = "url('[77]')";
+            bstyle.backgroundImage = "url('[BILDID_Twilight]')";
             document.getElementById("weatherContainer").style.border = "white 5px solid";
 
             document.getElementById("sunIcon").style.opacity = 1;
@@ -218,7 +233,7 @@
           } else if (hr >= 21 || hr < 5) {
             bstyle.backgroundColor = "#000066";
             bstyle.color = "white";
-            bstyle.backgroundImage =  "url('[76]')";
+            bstyle.backgroundImage =  "url('[BILDID_Night]')";
             document.getElementById("weatherContainer").style.border = "white 5px solid";
 
             document.getElementById("sunIcon").style.opacity = 0;
@@ -226,8 +241,8 @@
             //Zwischen 7 und 19 Uhr hellblauer Hintergrund
           } else if (hr >= 7 && hr < 19) {
             bstyle.backgroundColor = "#ccefff";
-            bstyle.color = "black";
-            bstyle.backgroundImage = "url('[78]')";
+            bstyle.color = "white";
+            bstyle.backgroundImage = "url('[BILDID_Day]')";
 
             document.getElementById("sunIcon").style.opacity = 1;
             document.getElementById("moonIcon").style.opacity = 0;
@@ -270,47 +285,50 @@
           }
         }
 
-        class Drop {
+          class Drop {
             constructor(xPosition, yPosition, dropSpeed, dropWidth, dropHeight) {
-                this.xPosition = xPosition;
-                this.yPosition = yPosition;
-                this.dropSpeed = dropSpeed;
-                this.dropWidth = dropWidth;
-                this.dropHeight = dropHeight;
-                this.element;
+              this.xPosition = xPosition;
+              this.yPosition = yPosition;
+              this.dropSpeed = dropSpeed;
+              this.dropWidth = dropWidth;
+              this.dropHeight = dropHeight;
+              this.element;
             }
             
-        show() {
-                this.element = document.createElement("div");
-                this.element.className += "rainDrop";
-                this.element.style.top = this.yPosition + "px";
-                this.element.style.left = this.xPosition + "px";
-                this.element.style.width = this.dropWidth + "px";
-                this.element.style.height = this.dropHeight + "px";
+            show() {
+              this.element = document.createElement("div");
+              this.element.className += "rainDrop";
+              this.element.style.top = this.yPosition + "px";
+              this.element.style.left = this.xPosition + "px";
+              this.element.style.width = this.dropWidth + "px";
+              this.element.style.height = this.dropHeight + "px";
 
-                let el = document.getElementById("drops-section");
-                el.appendChild(this.element);
+              let el = document.getElementById("drops-section");
+              el.appendChild(this.element);
             }
             
-        fall() {
-                const makeItRain = () => {
-                    this.yPosition = this.yPosition + this.dropSpeed;
-                    this.element.style.top = this.yPosition +"px";
+            fall() {
+              const makeItRain = () => {
+                this.yPosition = this.yPosition + this.dropSpeed;
+                this.element.style.top = this.yPosition +"px";
 
-                    if(this.yPosition < window.innerHeight) {
-                        requestAnimationFrame(makeItRain);
-                    } else {
-                        this.yPosition = -10;
-                        requestAnimationFrame(makeItRain);
-                    }
-
+                if(this.yPosition < window.innerHeight) {
+                  requestAnimationFrame(makeItRain);
+                } else {
+                  this.yPosition = -10;
+                  requestAnimationFrame(makeItRain);
                 }
 
-                requestAnimationFrame(makeItRain);
-        }
-        }
+              }
+
+              requestAnimationFrame(makeItRain);
+            }
+          }
         return;
     }
-</script>
+  </script>
+```
 
-````
+Beim letzten Teil, also beim "HEAD content to Embed(including script tags)" ,muss darauf geachtet werden, dass statt BILDID_... die jeweilige BildId des hochgeladenen Bildes verwendet wird.
+<img src="./images/xiboImages_readme/bildId.JPG">
+</P>
