@@ -5,12 +5,21 @@
     Um den Code am Xibo einzubinden, benötigt man mehrere Schritte.<br>
     Als erstes muss man die 4 Bilder aus dem images-Ordner (bgDay,bgNight,bgTwilight,bgRain) auf den Xibo hochladen.<br>
     Dafür geht man unter den Menüpunkt "Media" und klickt auf "Add media". Es wird sich ein kleines Fenster öffnen.<br>
+    <img src="images/xiboImages_readme/bild1.png" alt="Menüpunkt Media">
+    <img src="images/xiboImages_readme/bild2.png" alt="Add Media">
     In diesem klickt man zuerst auf "Add files" und wählt die 4 Bilder aus. Dann drückt man auf "Start upload" und <br>
     sobald die Bilder hochgeladen sind, drückt man auf "Done".<br>
+    <img src="images/xiboImages_readme/bild3.png" alt="Add files und start upload">
     Anschließend muss man ein neues Layout erstellen.<br>
-    Dafür geht man unter den Menüpunkt "Layout" und klick auf "Add Layout".<br>
+    Dafür geht man unter den Menüpunkt "Layouts" und klick auf "Add Layout".<br>
+    <img src="images/xiboImages_readme/bild4.png" alt="Menüpunkt layouts">
+    <img src="images/xiboImages_readme/bild5.png" alt="Add layout">
     Man wählt einen Namen für das Layout aus und speichert es ab.<br>
+    <img src="images/xiboImages_readme/bild6.png" alt="Embedd code">
     Danach macht man einen Doppelklick auf die schon vorhandene Region. Auch hier öffnet sich wieder ein Fenster.<br>
+    <img src="images/xiboImages_readme/bild7.png" alt="Layout mit region">
+    <img src="images/xiboImages_readme/bild8.png" alt="menü">
+    <img src="images/xiboImages_readme/bild9.png" alt="Menüpunkt embedded">
     Hier geht man unter den Punkt "Embedded" und fügt den Code wie folgt ein:<br>
 </p>
     HTML to Embed:
@@ -67,6 +76,7 @@
             margin-top: 2%;
             padding-left: 3%;
             padding-right: 3%;
+            background-color: rgba(191, 191, 191, 0.5);
         }
         #location span{
             font-size: 100%;
