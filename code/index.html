@@ -80,10 +80,11 @@
 
         if(rain > "0"){
           bstyle.backgroundImage = "url('./images/bgRain.jpg')";
+          document.getElementById("rainFallContainer").style.opacity = 1;
           makeItRain(defaultDropNum);
         }else{
           //Zwischen 19 und 21 Uhr bzw. 5 und 7 Uhr -> Dämmerung-Bild
-          if ((hr >= 19 && hr < 21) || (hr >= 21 && hr < 7)) {
+          if ((hr >= 19 && hr < 21) || (hr >= 5 && hr < 7)) {
             bstyle.backgroundColor = "#0059b3";
             bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgTwilight.jpg')";
@@ -103,7 +104,7 @@
             //Zwischen 7 und 19 Uhr -> Tag-Bild
           } else if (hr >= 7 && hr < 19) {
             bstyle.backgroundColor = "#ccefff";
-            bstyle.color = "black";
+            bstyle.color = "white";
             bstyle.backgroundImage = "url('./images/bgDay.jpg')";
 
             document.getElementById("sunIcon").style.opacity = 1;
