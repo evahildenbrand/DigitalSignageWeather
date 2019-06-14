@@ -329,6 +329,6 @@
   </script>
 ```
 
-Beim letzten Teil, also beim "HEAD content to Embed(including script tags)" ,muss darauf geachtet werden, dass statt BILDID_... die jeweilige BildId des hochgeladenen Bildes verwendet wird.
+Beim letzten Teil, also beim "HEAD content to Embed(including script tags)" ,muss darauf geachtet werden, dass statt BILDID_... die jeweilige BildId des hochgeladenen Bildes verwendet wird.<br>
 <img src="./images/xiboImages_readme/bildId.JPG">
 </P>
